@@ -23,13 +23,32 @@ class Event {
 		
 	}
 	
-	function getAllPeople() {
+	function getAllPeople($q) {
 		
-		$stmt = $this->connection->prepare("
-			SELECT id, age, color
-			FROM whistle
-			WHERE deleted IS NULL
-		");
+		if ($q != "") {
+			//otsin
+			echo "otsin: ".$q;
+			
+			$stmt = $this->connection->prepare("
+				SELECT id, age, color
+				FROM whistle
+				WHERE deleted IS NULL
+				AND ( age LIKE ? OR color LIKE ? )
+			");
+			
+			$searchWord = "%".$q."%";
+			
+			$stmt->bind_param("ss", $searchWord, $searchWord);
+			
+		} else {
+			// ei otsi
+			$stmt = $this->connection->prepare("
+				SELECT id, age, color
+				FROM whistle
+				WHERE deleted IS NULL
+			");
+		}
+		
 		$stmt->bind_result($id, $age, $color);
 		$stmt->execute();
 		

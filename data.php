@@ -37,7 +37,24 @@
 		$Event->saveEvent($Helper->cleanInput($_POST["age"]), $color);
 	}
 	
-	$people = $Event->getAllPeople();
+	// otsib
+	if (isset($_GET["q"])) {
+		
+		$q = $_GET["q"];
+	
+	} else {
+		//ei otsi
+		$q = "";
+	}
+	
+	
+	$people = $Event->getAllPeople($q);
+	
+	
+	
+	
+	
+	
 	
 	echo "<pre>";
 	var_dump($people[5]);
@@ -73,6 +90,11 @@
 
 
 <h2>Arhiiv</h2>
+
+<form>
+	<input type="search" name="q" value="<?=$q;?>">
+	<input type="submit" value="Otsi">
+</form>
 
 <?php 
 
