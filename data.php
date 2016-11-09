@@ -102,8 +102,40 @@
 	$html = "<table>";
 	
 		$html .= "<tr>";
-			$html .= "<th>ID</th>";
-			$html .= "<th>Vanus</th>";
+		
+			$orderId = "ASC";
+			$arr="&darr;";
+			if (isset($_GET["order"]) && 
+				$_GET["order"] == "ASC" &&
+				$_GET["sort"] == "id" ) {
+					
+				$orderId = "DESC";
+				$arr="&uarr;";
+			}
+		
+			$html .= "<th>
+						<a href='?q=".$q."&sort=id&order=".$orderId."'>
+							ID ".$arr."
+						</a>
+					 </th>";
+					 
+					 
+			
+			$orderAge = "ASC";
+			if (isset($_GET["order"]) && 
+				$_GET["order"] == "ASC" &&
+				$_GET["sort"] == "age" ) {
+					
+				$orderAge = "DESC";
+			}
+		
+			$html .= "<th>
+						<a href='?q=".$q."&sort=age&order=".$orderAge."'>
+							Vanus
+						</a>
+					 </th>";
+			
+			
 			$html .= "<th>Värv</th>";
 		$html .= "</tr>";
 		
