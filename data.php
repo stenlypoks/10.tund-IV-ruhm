@@ -47,8 +47,16 @@
 		$q = "";
 	}
 	
+	//vaikimisi, kui keegi mingit linki ei vajuta
+	$sort = "id";
+	$order = "ASC";
 	
-	$people = $Event->getAllPeople($q);
+	if (isset($_GET["sort"]) && isset($_GET["order"])) {
+		$sort = $_GET["sort"];
+		$order = $_GET["order"];
+	}
+	
+	$people = $Event->getAllPeople($q, $sort, $order);
 	
 	
 	
